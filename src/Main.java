@@ -1,17 +1,91 @@
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
+
+    static String[] board;
+    static String turn;
+
+    static void printBoard()
+    {
+        System.out.println("|---|---|---|");
+        System.out.println("| " + board[0] + " | "
+                           + board[1] + " | " + board[2]
+                           + " |");
+        System.out.println("|-----------|");
+        System.out.println("| " + board[3] + " | "
+                           + board[4] + " | " + board[5]
+                           + " |");
+        System.out.println("|-----------|");
+        System.out.println("| " + board[6] + " | "
+                           + board[7] + " | " + board[8]
+                           + " |");
+        System.out.println("|---|---|---|");
+    }
+
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Scanner in = new Scanner(System.in);
+        board = new String[9];
+        turn = "X";
+        String winner = null;
+ 
+        for (int a = 0; a < 9; a++) {
+            board[a] = String.valueOf(a + 1);
+        }
+ 
+        System.out.println("Welcome to 3x3 Tic Tac Toe.");
+        printBoard();
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        System.out.println(
+            "X will play first. Enter a slot number to place X in:");
+ 
+        while (winner == null) {
+            int numInput;
+           
+            try {
+                numInput = in.nextInt();
+                if (!(numInput > 0 && numInput <= 9)) {
+                    System.out.println(
+                        "Invalid input; re-enter slot number:");
+                    continue;
+                }
+            }
+            catch (InputMismatchException e) {
+                System.out.println(
+                    "Invalid input; re-enter slot number:");
+                continue;
+            }
+             
+            if (board[numInput - 1].equals(
+                    String.valueOf(numInput))) {
+                board[numInput - 1] = turn;
+ 
+                if (turn.equals("X")) {
+                    turn = "O";
+                }
+                else {
+                    turn = "X";
+                }
+ 
+                printBoard();
+                winner = checkWinner();
+            }
+            else {
+                System.out.println(
+                    "Slot already taken; re-enter slot number:");
+            }
+        }
+       
+        if (winner.equalsIgnoreCase("draw")) {
+            System.out.println(
+                "It's a draw! Thanks for playing.");
+        }
+       
+        else {
+            System.out.println(
+                "Congratulations! " + winner
+                + "'s have won! Thanks for playing.");
+        }
+      in.close();
         }
     }
 }
