@@ -2,6 +2,9 @@
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
 
+    static String[] board;
+    static String turn;
+
     static void printBoard()
     {
         System.out.println("|---|---|---|");
