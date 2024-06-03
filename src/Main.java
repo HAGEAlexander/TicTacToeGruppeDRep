@@ -5,6 +5,9 @@ public class Main {
     static String[] board;
     static String turn;
 
+    // CheckWinner method will 
+    // decide the combination 
+    // of three box given below.
     static String checkWinner()
     {
         for (int a = 0; a < 8; a++) {
@@ -112,7 +115,9 @@ public class Main {
                     "Invalid input; re-enter slot number:");
                 continue;
             }
-             
+
+            // This game has two player X and O.
+            // Here is the logic to decide the turn.
             if (board[numInput - 1].equals(
                     String.valueOf(numInput))) {
                 board[numInput - 1] = turn;
